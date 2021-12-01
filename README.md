@@ -18,7 +18,7 @@ dependencies: [
     ],
 targets:
  .target("yourtarget",
-        dependencies: [TimeSlotsCalculator])
+        dependencies: [BottomSheetSUI])
 ```
 
 ## Usage
