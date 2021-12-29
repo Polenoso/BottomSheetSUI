@@ -10,7 +10,7 @@ It is also inspired by the content made by [KavSoft](https://www.youtube.com/wat
 
 ## Installation
 
-Use the package manager [SPM](https://swift.org/package-manager/) to add TimeSlotCalculator.
+Use the package manager [SPM](https://swift.org/package-manager/) to add BottomSheetSUI.
 
 ```Swift
 dependencies: [
