@@ -9,10 +9,27 @@ import SwiftUI
 import BottomSheetSUI
 
 struct ContentView: View {
+    @State var detent: SheetDetent = .small
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-        BottomSheetView {
+        VStack {
+            Button {
+                self.detent = .large
+            } label: {
+                Text("Large")
+            }
+            Button {
+                self.detent = .medium
+            } label: {
+                Text("Medium")
+            }
+            Button {
+                self.detent = .small
+            } label: {
+                Text("Small")
+            }
+        }
+
+        BottomSheetView(detent: self.$detent) {
             Text("This is an example content")
         }
     }

@@ -16,25 +16,29 @@ public enum SheetDetent: Comparable {
 
 public struct BottomSheetView<Content: View>: View {
     let content: Content
-    @State var currentDetent: SheetDetent = .small
+    @Binding var currentDetent: SheetDetent
     @State private var offset: CGFloat = 0
     @State private var lastOffset: CGFloat = 0
     @GestureState private var gestureOffset: CGFloat = 0
     private var detents: Set<SheetDetent>
     @State private var lastDetent: SheetDetent = .small
+    private let color: Color
     public init(detents: [SheetDetent] = [.small, .medium, .large],
+                color: Color = .secondary,
+                detent: Binding<SheetDetent>,
                 @ViewBuilder content: () -> Content) {
         self.detents = Set(detents.sorted())
+        self.color = color
         self.content = content()
+        self._currentDetent = detent
         self.lastDetent = detents.min() ?? .small
-        self.currentDetent = detents.min() ?? .small
     }
     
     public var body: some View {
         GeometryReader { proxy in
             let height = proxy.frame(in: .global).height
             ZStack {
-                Color.secondary
+                self.color
                     .clipShape(CustomCorner(corners: [.topLeft, .topRight],
                                             radius: 30))
                 VStack {
@@ -51,6 +55,7 @@ public struct BottomSheetView<Content: View>: View {
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
             }
+            .frame(height: height + 300)
             .offset(y: height - minHeight(height))
             .offset(y: offset)
             .gesture(DragGesture()
@@ -63,6 +68,12 @@ public struct BottomSheetView<Content: View>: View {
                 self.setDetent(for: height)
                 lastOffset = offset
             }))
+            .onChange(of: currentDetent, perform: { newValue in
+                withAnimation {
+                    setFinalHeightForDetent(height, newValue)
+                    lastOffset = offset
+                }
+            })
         }
         .ignoresSafeArea(.all, edges: .bottom)
     }
