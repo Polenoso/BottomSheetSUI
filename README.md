@@ -34,7 +34,8 @@ BottomSheetView(detents: [.small, .medium, .large]) {
 ```
 
 ## Examples
-![](Images/SimpleExample.gif)
+<img src="Images/SimpleExample.gif" width="250" height="541"/>
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
