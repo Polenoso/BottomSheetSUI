@@ -14,7 +14,7 @@ Use the package manager [SPM](https://swift.org/package-manager/) to add BottomS
 
 ```Swift
 dependencies: [
-        .package(url: "https://github.com/Polenoso/BottomSheetSUI.git", from: "1.0.0"),
+        .package(url: "https://github.com/Polenoso/BottomSheetSUI.git", from: "1.0.1"),
     ],
 targets:
  .target("yourtarget",
@@ -27,8 +27,14 @@ targets:
 import BottomSheetSUI
 
 ...
-BottomSheetView(detents: [.small, .medium, .large]) {
-    Text("This is an example content")
+struct SomeView: View {
+    @State var detent: SheetDetent = .small
+    var body: some View {
+        ...
+        BottomSheetView(detent: self.$detent) {
+            Text("This is an example content")
+        }
+    } 
 }
 ...
 ```
