@@ -1,6 +1,6 @@
 # BottomSheetSUI
 
-BottomSheetSUI is a package that gives you the ability to show a Bottom sheet intractable, where you can add your own SwiftUI view. 
+BottomSheetSUI is a package that gives you the ability to show a Bottom sheet interactable, where you can add your own SwiftUI view. 
 
 You can customize the detents available for the sheet. Small, Medium and Large. It will use just a set of them.
 
